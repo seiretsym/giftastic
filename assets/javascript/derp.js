@@ -1,16 +1,28 @@
 // https://api.giphy.com/v1/gifs/random?api_key=wslWpWhssAgYDK6zVXacBDsacT47flr4&tag=cats
 
 // append button to list
+function addBtn() {
+    var btnStr = $("#derpSearchText").val().trim();
+    
+    var btn = $("<button>");
+    btn.val("Derp " + btnStr)
+    btn.attr("id", "derpGifBtn");
+    btn.addClass("btn-dark rounded");
+    btn.html("Derp " + btnStr);
 
-// convert string space to plus, so it doesn't break the api url
+    $("#derpBtnView").prepend(btn);
+}
 
 // button listener
-$("button").on("click", function() {
+$(document).on("click", "#derpGifBtn", function() {
+    // call function to show gifs
+});
 
-    if ($(this).attr("id") === "derpSearchBtn") {
-        console.log("search button clicked");
-    }
-    else {
-        console.log("different button clicked");
-    }
-})
+// submit button listener
+$("#derpSearchBtn").on("click", function() {
+    // stop this button from doing crazy stuff
+    event.preventDefault();
+
+    // run function addBtn
+    addBtn();
+});
