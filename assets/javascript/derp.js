@@ -37,7 +37,11 @@ function showGifs(q) {
             var card = $("<div>");
             var derp = $("<div>");
             var p = $("<p>").text("Rating: " + results[i].rating);
-            p.addClass("card-title");
+            var span = $("<span>").attr("id", "fav");
+            span.html("Add to Favorite");
+            span.addClass("float-right m-auto");
+            p.addClass("card-title text-light");
+            p.append(span);
             var derpImg = $("<img>");
             derpImg.attr("src", results[i].images.fixed_height_still.url);
             derpImg.attr("data-still", results[i].images.fixed_height_still.url);
@@ -46,6 +50,7 @@ function showGifs(q) {
             derpImg.addClass("gif");
             derp.addClass("card-body");
             card.addClass("card mb-1 border-0 bg-dark");
+            card.attr("data-id", results[i].id);
 
             derp.append(p, derpImg);
             card.append(derp);
@@ -99,4 +104,21 @@ $("#derpSearchBtn").on("click", function() {
     }
 });
 
+// load preset buttons
 $(document).ready(addBtn);
+
+// make mouseenter event on span
+$(document).on("mouseenter", "#fav", function() { 
+    $(this).css("cursor", "pointer");
+    $(this).css("text-decoration", "underline");
+})
+
+// make mouseout event on span
+$(document).on("mouseout", "#fav", function() { 
+    // $(this).css("cursor", "cursor");
+    $(this).css("text-decoration", "none");
+})
+
+$(document).on("click", "#fav", function() {
+    console.log(this + " was clicked");
+})
