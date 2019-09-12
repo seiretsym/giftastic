@@ -40,6 +40,7 @@ function showGifs(q) {
             var span = $("<span>").attr("id", "fav");
             span.html("Add to Favorite");
             span.addClass("float-right m-auto");
+            span.attr("data-id", results[i].id);
             p.addClass("card-title text-light");
             p.append(span);
             var derpImg = $("<img>");
@@ -50,7 +51,7 @@ function showGifs(q) {
             derpImg.addClass("gif");
             derp.addClass("card-body");
             card.addClass("card mb-1 border-0 bg-dark");
-            card.attr("data-id", results[i].id);
+            card.attr("id", results[i].id);
 
             derp.append(p, derpImg);
             card.append(derp);
@@ -104,6 +105,17 @@ $("#derpSearchBtn").on("click", function() {
     }
 });
 
+// add gif to favorites
+function addFavorite(dataid) {
+    console.log(dataid);
+    var card = $("#"+dataid).clone();
+    var span = card.children("div").children("p").children("span");
+    card.attr("id", "f" + dataid)
+    span.html("Remove from Favorite");
+    span.attr("id", "favd");
+    $("#derpFavorites").append(card);
+}
+
 // load preset buttons
 $(document).ready(addBtn);
 
@@ -119,6 +131,13 @@ $(document).on("mouseout", "#fav", function() {
     $(this).css("text-decoration", "none");
 })
 
+// when add favorite is clicked
 $(document).on("click", "#fav", function() {
-    console.log(this + " was clicked");
+    addFavorite($(this).attr("data-id"));
+})
+
+// when remove favorite is clicked
+$(document).on("click", "#favd", function() {
+    var dataid = $(this).attr("data-id");
+    $("#f"+dataid).remove();
 })
