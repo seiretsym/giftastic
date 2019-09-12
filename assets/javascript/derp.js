@@ -120,13 +120,13 @@ function addFavorite(dataid) {
 $(document).ready(addBtn);
 
 // make mouseenter event on span
-$(document).on("mouseenter", "#fav", function() { 
+$(document).on("mouseenter", "span", function() { 
     $(this).css("cursor", "pointer");
     $(this).css("text-decoration", "underline");
 })
 
 // make mouseout event on span
-$(document).on("mouseout", "#fav", function() { 
+$(document).on("mouseout", "span", function() { 
     // $(this).css("cursor", "cursor");
     $(this).css("text-decoration", "none");
 })
